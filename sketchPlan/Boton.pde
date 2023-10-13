@@ -6,20 +6,31 @@ class Boton
   int ancho;
   // medida del boton en pixeles vertical
   int alto;
+  
+  String img;
 
   Boton(Vector2 posicion, int xsize, int ysize) {
     pos = posicion;
     ancho = xsize;
     alto = ysize;
   }
+  Boton(Vector2 posicion, int xsize, int ysize, String image) {
+    pos = posicion;
+    ancho = xsize;
+    alto = ysize;
+    img = image;
+  }
 
   void mostrar() {
-    if (this.hover()) {
+    if (hover()) {
       fill(0);
     } else {
       fill(100);
     }
     rect(pos.x-(ancho/2), pos.y-(alto/2), ancho, alto, 20);
+    if(img != null){
+      image(imagen(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
+    }
   }
 
   boolean hover() {
@@ -33,4 +44,8 @@ class Boton
       return false;
     }
   }
+  PImage imagen() {
+    return loadImage(img);
+  }
+  
 }

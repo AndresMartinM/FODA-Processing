@@ -38,9 +38,9 @@ https://processing.org/examples/rollover.html
 Vector2 vector = new Vector2(200,250);
 Boton btn = new Boton(vector, 100,100);
 Vector2 vector2 = new Vector2(400,350);
-Boton btn2 = new Boton(vector2, 100,100);
+Boton btn2 = new Boton(vector2, 100,100,"mario01.gif");
 Vector2 vector3 = new Vector2(600,250);
-Boton btn3 = new Boton(vector3, 100,100);
+Boton btn3 = new Boton(vector3, 100,100,"img.jpg");
 
 
 void setup() {
