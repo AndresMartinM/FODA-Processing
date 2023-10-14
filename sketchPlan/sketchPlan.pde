@@ -19,38 +19,70 @@
 //   Revisar Ponderacion
 //
 /* Referencias
-uso del mouse :
-https://processing.org/examples/mousefunctions.html
-uso del texto :
-https://processing.org/examples/charactersstrings.html
-https://processing.org/examples/words.html
-uso de Class y objetos :
-https://processing.org/examples/objects.html
-uso de json :
-https://processing.org/examples/loadsavejson.html
-uso de GUI :
-https://processing.org/examples/button.html
-https://processing.org/examples/handles.html
-  hoover :
-https://processing.org/examples/rollover.html
-*/
+ uso del mouse :
+ https://processing.org/examples/mousefunctions.html
+ uso del texto :
+ https://processing.org/examples/charactersstrings.html
+ https://processing.org/examples/words.html
+ uso de Class y objetos :
+ https://processing.org/examples/objects.html
+ uso de json :
+ https://processing.org/examples/loadsavejson.html
+ uso de GUI :
+ https://processing.org/examples/button.html
+ https://processing.org/examples/handles.html
+ hoover :
+ https://processing.org/examples/rollover.html
+ */
 
-Vector2 vector = new Vector2(200,250);
-Boton btn = new Boton(vector, 100,100);
-Vector2 vector2 = new Vector2(400,350);
-Boton btn2 = new Boton(vector2, 100,100,"mario01.gif");
-Vector2 vector3 = new Vector2(600,250);
-Boton btn3 = new Boton(vector3, 100,100,"img.jpg");
+String nuevo = "file-earmark-plus.svg";
+String abrir = "file-earmark-arrow-down.svg";
+String equis = "x-circle.svg";
+String punto = "asterisk.svg";
+String check = "clipboard-check.svg";
+String slide = "sliders2-vertical.svg";
+String lista = "card-list.svg";
+String izq = "arrow-left.svg";
+String der = "arrow-right.svg";
+String volver = "caret-left.svg";
 
+int escena = 0;
+
+Vector2 vector = new Vector2(200, 300);
+Boton btn = new Boton(vector, 100, 100, nuevo);
+
+// volver
+Vector2 vector2 = new Vector2(60, 60);
+Boton btn2 = new Boton(vector2, 60, 60, volver);
+
+// salir
+Vector2 vector3 = new Vector2(600, 300);
+Boton btn3 = new Boton(vector3, 100, 100, equis);
 
 void setup() {
   size(800, 600);
-  background(255);
+  background(230);
   noStroke();
 }
 
 void draw() {
-  btn.mostrar();
-  btn2.mostrar();
-  btn3.mostrar();
+  background(230);
+  if (escena == 0) {
+    btn.mostrar();
+    btn3.mostrar();
+  } else if (escena == 1) {
+    btn2.mostrar();
+  }
+}
+
+void mousePressed() {
+  if (btn.hover()) {
+    escena = 1;
+  }
+  if (btn2.hover()) {
+    escena = 0;
+  }
+  if (btn3.hover()) {
+    exit();
+  }
 }

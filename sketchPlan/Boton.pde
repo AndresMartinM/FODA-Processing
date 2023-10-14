@@ -6,7 +6,7 @@ class Boton
   int ancho;
   // medida del boton en pixeles vertical
   int alto;
-  
+
   String img;
 
   Boton(Vector2 posicion, int xsize, int ysize) {
@@ -23,13 +23,17 @@ class Boton
 
   void mostrar() {
     if (hover()) {
-      fill(0);
+      fill(180);
     } else {
-      fill(100);
+      fill(200);
     }
     rect(pos.x-(ancho/2), pos.y-(alto/2), ancho, alto, 20);
-    if(img != null){
-      image(imagen(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
+    if (img != null) {
+      if (esSVG()) {
+        shape(svg(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
+      } else {
+        image(imagen(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
+      }
     }
   }
 
@@ -44,8 +48,19 @@ class Boton
       return false;
     }
   }
+
+  boolean esSVG() {
+    if (img.endsWith("svg")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   PImage imagen() {
     return loadImage(img);
   }
-  
+  PShape svg() {
+    return loadShape(img);
+  }
 }
