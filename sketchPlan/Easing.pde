@@ -1,9 +1,9 @@
+// usar con valores de t entre 0 y 1
 
-
-float animIn( float t ) {
+float animOut( float t ) {
     return t * t * t;
 }
 
-float animOut( float t ) {
+float animIn( float t ) {
     return 1 + (--t) * t * t;
 }

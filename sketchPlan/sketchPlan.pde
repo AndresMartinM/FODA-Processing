@@ -35,54 +35,109 @@
  https://processing.org/examples/rollover.html
  */
 
-String nuevo = "file-earmark-plus.svg";
-String abrir = "file-earmark-arrow-down.svg";
-String equis = "x-circle.svg";
-String punto = "asterisk.svg";
-String check = "clipboard-check.svg";
-String slide = "sliders2-vertical.svg";
-String lista = "card-list.svg";
-String izq = "arrow-left.svg";
-String der = "arrow-right.svg";
-String volver = "caret-left.svg";
+String docmas = "img/file-earmark-plus.svg";
+String docabr = "img/file-earmark-arrow-down.svg";
+String equis = "img/x-circle.svg";
+String punto = "img/asterisk.svg";
+String check = "img/clipboard-check.svg";
+String slide = "img/sliders2-vertical.svg";
+String lista = "img/card-list.svg";
+String izq = "img/arrow-left.svg";
+String der = "img/arrow-right.svg";
+String volver = "img/caret-left.svg";
 
 int escena = 0;
 
+int btnS = 60;
+int btnM = 80;
+int btnL = 120;
+
+// fortaleza
+color verde;
+// debilidad
+color amarillo;
+// amenaza
+color rojo;
+// oportunidad
+color azul;
+
+
+// nuevo
 Vector2 vector = new Vector2(200, 300);
-Boton btn = new Boton(vector, 100, 100, nuevo);
+Boton nuevo = new Boton(vector, btnL, btnL, docmas);
+
+// abrir
+Vector2 vector1 = new Vector2(400, 300);
+Boton abrir = new Boton(vector1, btnL, btnL, docabr);
 
 // volver
 Vector2 vector2 = new Vector2(60, 60);
-Boton btn2 = new Boton(vector2, 60, 60, volver);
+Boton atras = new Boton(vector2, btnS, btnS, volver);
 
 // salir
 Vector2 vector3 = new Vector2(600, 300);
-Boton btn3 = new Boton(vector3, 100, 100, equis);
+Boton salir = new Boton(vector3, btnL, btnL, equis);
+
+// navbar
+Vector2 vectorhome = new Vector2(300, 550);
+Boton home = new Boton(vectorhome, btnS, btnS, check);
+Vector2 vectorlist = new Vector2(400, 550);
+Boton list = new Boton(vectorlist, btnS, btnS, lista);
+Vector2 vectorpond = new Vector2(500, 550);
+Boton pond = new Boton(vectorpond, btnS, btnS, slide);
 
 void setup() {
+  colorMode(HSB, 360, 100, 100);
+
+  // fortaleza
+  verde = color(148, 88, 33);
+  // debilidad
+  amarillo = color(33, 91, 54);
+  // amenaza
+  rojo = color(10, 100, 52);
+  // oportunidad
+  azul = color(230, 100, 52);
+
   size(800, 600);
-  background(230);
+  background(0, 0, 90);
   noStroke();
 }
 
 void draw() {
-  background(230);
+  background(0, 0, 90);
   if (escena == 0) {
-    btn.mostrar();
-    btn3.mostrar();
-  } else if (escena == 1) {
-    btn2.mostrar();
+    nuevo.mostrar(verde);
+    abrir.mostrar(amarillo);
+    salir.mostrar(rojo);
+  } else if (escena >= 1) {
+    atras.mostrar();
+    navbar();
   }
 }
 
 void mousePressed() {
-  if (btn.hover()) {
+  if (nuevo.hover() && escena == 0) {
     escena = 1;
   }
-  if (btn2.hover()) {
-    escena = 0;
+  if (atras.hover() && escena > 0) {
+    escena -= 1;
   }
-  if (btn3.hover()) {
+  if (salir.hover() && escena == 0) {
     exit();
   }
+  if (home.hover() && escena > 0) {
+    escena = 1;
+  }
+  if (list.hover() && escena > 0) {
+    escena = 2;
+  }
+  if (pond.hover() && escena > 0) {
+    escena = 3;
+  }
+}
+
+void navbar() {
+  home.mostrar();
+  list.mostrar();
+  pond.mostrar();
 }

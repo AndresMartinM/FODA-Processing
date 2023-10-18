@@ -22,19 +22,40 @@ class Boton
   }
 
   void mostrar() {
-    if (hover()) {
-      fill(180);
-    } else {
-      fill(200);
-    }
+    color c = color(20);
+    mostrar(c);
+  }
+
+  float fcMin = 0.75;
+  float fcMax = 0.999;
+  float factorColor = fcMin;
+
+  float t = 0;
+  float step = 0.15;
+
+  void mostrar(color c) {
+    colorAnim(c);
     rect(pos.x-(ancho/2), pos.y-(alto/2), ancho, alto, 20);
     if (img != null) {
       if (esSVG()) {
+        fill(c);
         shape(svg(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
       } else {
         image(imagen(), pos.x-(ancho/2)+15, pos.y-(alto/2)+15, ancho-30, alto-30);
       }
     }
+  }
+
+
+
+  void colorAnim(color c) {
+    if (hover() && t <= 1) {
+      t += step;
+    } else if (!hover() && t >= 0) {
+      t -= step;
+    }
+    factorColor = map(animIn(t),0,1,fcMin,fcMax);
+    fill(lerpColor(c, color(hue(c), saturation(c)-20, 100), factorColor));
   }
 
   boolean hover() {
@@ -61,6 +82,8 @@ class Boton
     return loadImage(img);
   }
   PShape svg() {
-    return loadShape(img);
+    PShape v = loadShape(img);
+    v.disableStyle();
+    return v;
   }
 }
